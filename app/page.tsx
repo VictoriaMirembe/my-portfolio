@@ -1,65 +1,114 @@
-import Image from "next/image";
+'use client'
+
+import { useState, useEffect } from 'react'
+import Image from 'next/image'
 
 export default function Home() {
+
+  // Feature 1 - Typing effect
+  const fullName = "Ssekajja Victoria Mirembe Frontend Dev,"
+  const [displayedName, setDisplayedName] = useState("")
+  const [nameIndex, setNameIndex] = useState(0)
+
+  useEffect(() => {
+    if (nameIndex < fullName.length) {
+      const timeout = setTimeout(() => {
+        setDisplayedName(prev => prev + fullName[nameIndex])
+        setNameIndex(prev => prev + 1)
+      }, 100)
+      return () => clearTimeout(timeout)
+    }
+  }, [nameIndex])
+
+  // Feature 2 - Copy email
+  const [copied, setCopied] = useState(false)
+
+  function copyEmail() {
+    navigator.clipboard.writeText("victoria@email.com")
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main>
+
+      {/* Section 1 - Hero */}
+      <div className="hero-section">
+
+        {/* Left side - text */}
+        <div className="hero-text">
+          <p className="hero-greeting">Hello, I am</p>
+          <h1>{displayedName}<span className="cursor">|</span></h1>
+          <h2>Junior AI Data Scientist</h2>
+          <p className="hero-description">
+            I build AI-powered tools for journalism education
+            in East Africa. Based in Kampala, Uganda.
           </p>
+          <div className="hero-buttons">
+            <a href="/projects" className="btn">View My Work</a>
+            <a href="/contact" className="btn-outline">Contact Me</a>
+            <button onClick={copyEmail} className="btn-outline">
+              {copied ? "✅ Copied!" : "📋 Copy Email"}
+            </button>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Right side - photo */}
+        <div className="hero-image">
+          <Image
+            src="/profile.jpg"
+            alt="Victoria Ssekajja"
+            width={320}
+            height={320}
+          />
         </div>
-      </main>
-    </div>
-  );
+
+      </div>
+
+      {/* Section 2 - Stats */}
+      <div className="stats-section">
+        <div className="stat-card">
+          <h3>1+</h3>
+          <p>Years of Experience</p>
+        </div>
+        <div className="stat-card">
+          <h3>3+</h3>
+          <p>Projects Completed</p>
+        </div>
+        <div className="stat-card">
+          <h3>2+</h3>
+          <p>AI Tools Built</p>
+        </div>
+        <div className="stat-card">
+          <h3>100%</h3>
+          <p>Passion for Learning</p>
+        </div>
+      </div>
+
+      {/* Section 3 - Services */}
+      <div className="services-section">
+        <h2>What I Do</h2>
+        <p>Here is how I can help your organisation</p>
+
+        <div className="services-grid">
+          <div className="service-card">
+            <div className="service-icon">🤖</div>
+            <h3>AI Integration</h3>
+            <p>I connect AI tools like Claude and ChatGPT into web applications to create smart interactive features.</p>
+          </div>
+          <div className="service-card">
+            <div className="service-icon">🌐</div>
+            <h3>Web Development</h3>
+            <p>I build clean responsive websites and platforms using React and Next.js that work on any device.</p>
+          </div>
+          <div className="service-card">
+            <div className="service-icon">📚</div>
+            <h3>E-Learning Tools</h3>
+            <p>I create digital learning experiences that help educators teach complex topics in simple engaging ways.</p>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  )
 }
