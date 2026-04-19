@@ -2,10 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import Wrapper from './components/Wrapper';
 
 export default function Home() {
-
-  // Feature 1 - Typing effect
   const fullName = "Ssekajja Victoria Mirembe Frontend Dev,"
   const [displayedName, setDisplayedName] = useState("")
   const [nameIndex, setNameIndex] = useState(0)
@@ -20,22 +19,19 @@ export default function Home() {
     }
   }, [nameIndex])
 
-  // Feature 2 - Copy email
   const [copied, setCopied] = useState(false)
 
   function copyEmail() {
-    navigator.clipboard.writeText("victoria@email.com")
+    navigator.clipboard.writeText("jemistates7@gmail.com")
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
 
   return (
-    <main>
-
-      {/* Section 1 - Hero */}
+    <Wrapper>
+      <main>
       <div className="hero-section">
 
-        {/* Left side - text */}
         <div className="hero-text">
           <p className="hero-greeting">Hello, I am</p>
           <h1>{displayedName}<span className="cursor">|</span></h1>
@@ -53,7 +49,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Right side - photo */}
         <div className="hero-image">
           <Image
             src="/profile.jpg"
@@ -65,10 +60,9 @@ export default function Home() {
 
       </div>
 
-      {/* Section 2 - Stats */}
       <div className="stats-section">
         <div className="stat-card">
-          <h3>1+</h3>
+          <h3>3+</h3>
           <p>Years of Experience</p>
         </div>
         <div className="stat-card">
@@ -76,7 +70,7 @@ export default function Home() {
           <p>Projects Completed</p>
         </div>
         <div className="stat-card">
-          <h3>2+</h3>
+          <h3>5+</h3>
           <p>AI Tools Built</p>
         </div>
         <div className="stat-card">
@@ -85,16 +79,15 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Section 3 - Services */}
       <div className="services-section">
         <h2>What I Do</h2>
         <p>Here is how I can help your organisation</p>
-
-        <div className="services-grid">
+        <div className="services">
+          <div className="services-grid">
           <div className="service-card">
             <div className="service-icon">🤖</div>
             <h3>AI Integration</h3>
-            <p>I connect AI tools like Claude and ChatGPT into web applications to create smart interactive features.</p>
+            <p>I connect AI tools like Claude and OpenAI into web applications to create smart interactive features.</p>
           </div>
           <div className="service-card">
             <div className="service-icon">🌐</div>
@@ -107,8 +100,28 @@ export default function Home() {
             <p>I create digital learning experiences that help educators teach complex topics in simple engaging ways.</p>
           </div>
         </div>
+        <div className="services-grid">
+          <div className="service-card">
+            <div className="service-icon">🤖</div>
+            <h3>AI Integration</h3>
+            <p>I connect AI tools like Claude and OpenAI into web applications to create smart interactive features.</p>
+          </div>
+          <div className="service-card">
+            <div className="service-icon">🌐</div>
+            <h3>Web Development</h3>
+            <p>I build clean responsive websites and platforms using React and Next.js that work on any device.</p>
+          </div>
+          <div className="service-card">
+            <div className="service-icon">📚</div>
+            <h3>E-Learning Tools</h3>
+            <p>I create digital learning experiences that help educators teach complex topics in simple engaging ways.</p>
+          </div>
+        </div>
+        </div>
+        
       </div>
 
     </main>
-  )
+    </Wrapper>
+  );
 }

@@ -611,3 +611,81 @@ p {
 .chatbot-send:hover {
   background: #5b21b6;
 }
+.services{
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.dark-mode {
+  background-color: #0f0f0f;
+  color: #f0f0f0;
+}
+
+.dark-mode body {
+  background-color: #0f0f0f;
+}
+
+.dark-mode nav {
+  background-color: #1a0a3a;
+}
+
+.dark-mode .top h1,
+.dark-mode h1,
+.dark-mode .hero-text h1 {
+  color: #f0f0f0;
+}
+
+.dark-mode p,
+.dark-mode .hero-description {
+  color: #aaa;
+}
+
+.dark-mode .card,
+.dark-mode .project-card,
+.dark-mode .contact-card,
+.dark-mode .contact-form,
+.dark-mode .service-card,
+.dark-mode .stat-card,
+.dark-mode .chatbot-window {
+  background: #1e1e1e;
+  border-color: #333;
+  color: #f0f0f0;
+}
+
+.dark-mode .skills h2,
+.dark-mode .education h2,
+.dark-mode .services-section h2,
+.dark-mode .contact-form h2,
+.dark-mode .card h3,
+.dark-mode .project-card h3,
+.dark-mode .service-card h3 {
+  color: #f0f0f0;
+}
+
+.dark-mode .services-section {
+  background: #1a1a1a;
+}
+
+.dark-mode .chatbot-messages {
+  background: #2a2a2a;
+}
+
+.dark-mode .chat-bubble.assistant {
+  background: #333;
+  color: #f0f0f0;
+  border-color: #444;
+}
+
+.dark-mode .form-group input,
+.dark-mode .form-group textarea {
+  background: #2a2a2a;
+  border-color: #444;
+  color: #f0f0f0;
+}
+
+.dark-mode .chatbot-input {
+  background: #2a2a2a;
+  border-color: #444;
+  color: #f0f0f0;
+}

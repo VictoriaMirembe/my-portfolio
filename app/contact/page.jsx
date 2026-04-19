@@ -1,6 +1,8 @@
+import Wrapper from "../components/Wrapper"
 export default function Contact() {
   return (
-    <main>
+    <Wrapper>
+      <main>
       <h1>Contact Me</h1>
       <p>I am open to opportunities, collaborations and conversations. Feel free to reach out.</p>
 
@@ -46,6 +48,7 @@ export default function Contact() {
         <button className="btn">Send Message</button>
       </div>
 
-    </main>
+      </main>
+    </Wrapper>
   )
 }

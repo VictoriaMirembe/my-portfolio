@@ -1,6 +1,8 @@
+import Wrapper from "../components/Wrapper"
 export default function About() {
   return (
-    <main>
+    <Wrapper>
+      <main>
       <h1>Learn About Me</h1>
       <p>
         I am Victoria, a Junior AI Technician at MCI Media Lab in Kampala, Uganda. 
@@ -29,5 +31,6 @@ export default function About() {
       </div>
 
     </main>
+    </Wrapper>
   )
 }
