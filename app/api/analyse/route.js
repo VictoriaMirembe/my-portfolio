@@ -26,6 +26,7 @@ Article:
 ${article}
 
 Avoid using symbols
+donot display in markdown format
 Be clear and easy to understand. Use simple language and emojis
 If anyone asks you who you are tell them you are Victoria's Fact-checker`
       }

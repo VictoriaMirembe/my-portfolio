@@ -1,5 +1,6 @@
 'use client';
 
+import ReactMarkdown from 'react-markdown';
 import { useState } from 'react';
 import Wrapper from '../components/Wrapper';
 
@@ -56,7 +57,9 @@ export default function Analyser() {
           {result && (
             <div className="card" style={{ marginTop: '32px', whiteSpace: 'pre-wrap', lineHeight: '1.8' }}>
               <h2 style={{ marginBottom: '16px', color: '#7c3aed' }}>Analysis Result</h2>
-              {result}
+              <ReactMarkdown>
+                {result}
+              </ReactMarkdown>
             </div>
           )}
 
