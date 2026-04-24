@@ -40,7 +40,9 @@ export default function RootLayout({
               <a href="/about">About</a>
               <a href="/projects">Projects</a>
               <a href="/analyser">Analyser</a>
+              <a href="/summariser">summariser</a>
               <a href="/contact">Contact</a>
+              <a href="/quiz">Quiz</a>
             </div>
             <ThemeToggle />  {/* 👈 toggle button sits in the nav */}
           </nav>

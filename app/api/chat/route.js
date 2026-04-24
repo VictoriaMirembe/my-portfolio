@@ -1,53 +1,84 @@
-import Anthropic from '@anthropic-ai/sdk'
+import Anthropic from "@anthropic-ai/sdk";
+import { NextResponse } from "next/server";
 
-const client = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY
-})
+const client = new Anthropic();
+
+// Helper: check if input is a URL
+function isUrl(text) {
+  try {
+    new URL(text.trim());
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+// Helper: fetch article text from a URL
+async function fetchArticleFromUrl(url) {
+  const response = await fetch(url);
+  const html = await response.text();
+
+  // Strip HTML tags to get plain text
+  const plainText = html
+    .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
+    .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  return plainText.slice(0, 8000); // Limit to avoid token overflow
+}
 
 export async function POST(request) {
   try {
-    const { messages } = await request.json()
+    const { articleText } = await request.json();
 
-    const response = await client.messages.create({
-    //   model: 'claude-haiku-4-5-20251001',
-      model: 'claude-sonnet-4-6', 
-    //   max_tokens: 500,
-      max_tokens:1024,
-      system: `You are a friendly personal assistant on Victoria Ssekajja's portfolio website.
+    if (!articleText || articleText.trim() === "") {
+      return NextResponse.json(
+        { error: "No article text provided" },
+        { status: 400 }
+      );
+    }
 
-        Here is everything you know about Victoria:
-        - Full name: Victoria Ssekajja
-        - Job title: Junior AI Data Scientist
-        - Workplace: MCI Media Lab, Kampala Uganda
-        - home location: Kasangati, Gayaza Road.
-        - Education: Studies Computer Science at Cavendish University, Data Science mangement and Analytics at UICT
-        - Skills: HTML, CSS, JavaScript, React, Next.js, Claude AI API, Git and GitHub
-        - Projects: Zara the AI Story Friend (a children's learning app), MCI E-Learning Platform, Personal Portfolio
-        - Education: Computer Science diploma, data Science managment and Analytics diploma
-        - Passionate about: AI tools, journalism education, disinformation detection
-        - Based in: Kampala, Uganda
-        - hobbies during free time: Coding, Plays the keyboard, Goes for swimming, goes for Chicken
+    let textToSummarise = articleText;
 
-        How to behave:
-        - Be friendly, warm and professional
-        - Keep answers short and clear — 2 to 3 sentences maximum
-        - Add some emojis to your response
-        - If someone asks something you do not know about Victoria, say "I am not sure about that, but you can contact Victoria directly!"
-        - Never make up information about Victoria that is not listed above
-        - If someone asks who you are, say you are Victoria's AI assistant`,
-      messages: messages
-    })
+    // If user pasted a URL, fetch its content
+    if (isUrl(articleText.trim())) {
+      try {
+        textToSummarise = await fetchArticleFromUrl(articleText.trim());
+      } catch (err) {
+        return NextResponse.json(
+          { error: "Could not fetch article from that URL. Try pasting the text directly." },
+          { status: 400 }
+        );
+      }
+    }
 
-    return Response.json({
-      reply: response.content[0].text
-    })
+    const message = await client.messages.create({
+      model: "claude-sonnet-4-20250514",
+      max_tokens: 1024,
+      messages: [
+        {
+          role: "user",
+          content: `Please summarise the following article clearly and concisely.
+          Include:
+          - A one-sentence TL;DR
+          - 3-5 key points
+          - The main conclusion
 
+          Article:
+          ${textToSummarise}`,
+        },
+      ],
+    });
+
+    const summary = message.content[0].text;
+    return NextResponse.json({ summary });
   } catch (error) {
-    // ✅ Log the REAL error so you can see it
-    console.error('Anthropic API error:', error.message)
-    return Response.json(
-      { reply: '⚠️ Something went wrong. Please try again.' },
+    console.error("Summarise API error:", error);
+    return NextResponse.json(
+      { error: "Failed to summarise article" },
       { status: 500 }
-    )
+    );
   }
 }
