@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Victoria Ssekajja — Junior AI Data Scientist",
-  description: "Portfolio of Victoria Ssekajja, Junior AI Technician at MCI Media Lab Kampala Uganda",
+  title: "Victoria Ssekajja — Software Developer",
+  description: "Portfolio of Victoria Ssekajja, a Software Developer building web, mobile, and AI-integrated applications, based in Kampala, Uganda.",
 };
 
 export default function RootLayout({
@@ -39,10 +39,7 @@ export default function RootLayout({
               <a href="/">Home</a>
               <a href="/about">About</a>
               <a href="/projects">Projects</a>
-              <a href="/analyser">Analyser</a>
-              <a href="/summariser">summariser</a>
               <a href="/contact">Contact</a>
-              <a href="/quiz">Quiz</a>
             </div>
             <ThemeToggle />  {/* 👈 toggle button sits in the nav */}
           </nav>

@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Wrapper from './components/Wrapper';
 
 export default function Home() {
-  const fullName = "Ssekajja Victoria Mirembe Frontend Dev,"
+  const fullName = "Ssekajja Victoria Mirembe,"
   const [displayedName, setDisplayedName] = useState("")
   const [nameIndex, setNameIndex] = useState(0)
 
@@ -35,10 +35,10 @@ export default function Home() {
         <div className="hero-text">
           <p className="hero-greeting">Hello, I am</p>
           <h1>{displayedName}<span className="cursor">|</span></h1>
-          <h2>Junior AI Data Scientist</h2>
+          <h2>Software Developer</h2>
           <p className="hero-description">
-            I build AI-powered tools for journalism education
-            in East Africa. Based in Kampala, Uganda.
+            I build web, mobile, and backend applications, and
+            integrate AI where it adds real value. Based in Kampala, Uganda.
           </p>
           <div className="hero-buttons">
             <a href="/projects" className="btn">View My Work</a>
@@ -70,8 +70,8 @@ export default function Home() {
           <p>Projects Completed</p>
         </div>
         <div className="stat-card">
-          <h3>5+</h3>
-          <p>AI Tools Built</p>
+          <h3>4+</h3>
+          <p>Technologies Mastered</p>
         </div>
         <div className="stat-card">
           <h3>100%</h3>
@@ -85,40 +85,27 @@ export default function Home() {
         <div className="services">
           <div className="services-grid">
           <div className="service-card">
-            <div className="service-icon">🤖</div>
-            <h3>AI Integration</h3>
-            <p>I connect AI tools like Claude and OpenAI into web applications to create smart interactive features.</p>
-          </div>
-          <div className="service-card">
             <div className="service-icon">🌐</div>
             <h3>Web Development</h3>
-            <p>I build clean responsive websites and platforms using React and Next.js that work on any device.</p>
+            <p>I build clean, responsive websites and platforms using React and Next.js that work on any device.</p>
           </div>
           <div className="service-card">
-            <div className="service-icon">📚</div>
-            <h3>E-Learning Tools</h3>
-            <p>I create digital learning experiences that help educators teach complex topics in simple engaging ways.</p>
+            <div className="service-icon">📱</div>
+            <h3>Mobile Apps</h3>
+            <p>I design and build mobile applications that give users a fast, native-feeling experience.</p>
           </div>
-        </div>
-        <div className="services-grid">
+          <div className="service-card">
+            <div className="service-icon">⚙️</div>
+            <h3>Backend & Systems</h3>
+            <p>I design APIs, databases, and backend systems that keep applications reliable as they grow.</p>
+          </div>
           <div className="service-card">
             <div className="service-icon">🤖</div>
             <h3>AI Integration</h3>
-            <p>I connect AI tools like Claude and OpenAI into web applications to create smart interactive features.</p>
-          </div>
-          <div className="service-card">
-            <div className="service-icon">🌐</div>
-            <h3>Web Development</h3>
-            <p>I build clean responsive websites and platforms using React and Next.js that work on any device.</p>
-          </div>
-          <div className="service-card">
-            <div className="service-icon">📚</div>
-            <h3>E-Learning Tools</h3>
-            <p>I create digital learning experiences that help educators teach complex topics in simple engaging ways.</p>
+            <p>I integrate AI capabilities into applications to add smart, interactive features where they add real value.</p>
           </div>
         </div>
         </div>
-        
       </div>
 
     </main>

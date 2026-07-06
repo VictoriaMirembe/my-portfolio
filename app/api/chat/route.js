@@ -3,81 +3,49 @@ import { NextResponse } from "next/server";
 
 const client = new Anthropic();
 
-// Helper: check if input is a URL
-function isUrl(text) {
-  try {
-    new URL(text.trim());
-    return true;
-  } catch {
-    return false;
-  }
-}
+const SYSTEM_PROMPT = `You are Victoria's portfolio assistant. Answer questions about Victoria Ssekajja
+in a friendly, concise way, using only the facts below. If asked something you don't know, say you're
+not sure and suggest reaching out to Victoria directly via the Contact page.
 
-// Helper: fetch article text from a URL
-async function fetchArticleFromUrl(url) {
-  const response = await fetch(url);
-  const html = await response.text();
-
-  // Strip HTML tags to get plain text
-  const plainText = html
-    .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
-    .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
-    .replace(/<[^>]+>/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-
-  return plainText.slice(0, 8000); // Limit to avoid token overflow
-}
+About Victoria:
+- Software Developer based in Kampala, Uganda, currently working at MCI Media Lab.
+- Builds web, mobile, and backend applications, and integrates AI capabilities where they add value.
+- Skills: HTML & CSS, JavaScript, React, Next.js, React Native, Node.js & Express, databases (MongoDB/SQL),
+  REST APIs, the Claude AI API, and Git & GitHub.
+- Education: Diploma in Data Science Management Analytics, Uganda Institute of Information and
+  Communication Technology, 2026.
+- Projects:
+  - Zara — AI Story Friend: an AI-powered teaching tool that helps children aged 5-8 learn through
+    stories and games using the Claude API (Next.js, React).
+  - MCI E-Learning Platform: an e-learning platform for journalism educators to learn about
+    AI-powered disinformation detection (Next.js).
+  - This portfolio site, built with Next.js and React.
+- Contact: jemistates7@gmail.com.`;
 
 export async function POST(request) {
   try {
-    const { articleText } = await request.json();
+    const { messages } = await request.json();
 
-    if (!articleText || articleText.trim() === "") {
+    if (!Array.isArray(messages) || messages.length === 0) {
       return NextResponse.json(
-        { error: "No article text provided" },
+        { error: "No messages provided" },
         { status: 400 }
       );
     }
 
-    let textToSummarise = articleText;
-
-    // If user pasted a URL, fetch its content
-    if (isUrl(articleText.trim())) {
-      try {
-        textToSummarise = await fetchArticleFromUrl(articleText.trim());
-      } catch (err) {
-        return NextResponse.json(
-          { error: "Could not fetch article from that URL. Try pasting the text directly." },
-          { status: 400 }
-        );
-      }
-    }
-
-    const message = await client.messages.create({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 1024,
-      messages: [
-        {
-          role: "user",
-          content: `Please summarise the following article clearly and concisely.
-          Include:
-          - A one-sentence TL;DR
-          - 3-5 key points
-          - The main conclusion
-
-          Article:
-          ${textToSummarise}`,
-        },
-      ],
+    const response = await client.messages.create({
+      model: "claude-sonnet-5",
+      max_tokens: 500,
+      system: SYSTEM_PROMPT,
+      messages: messages.map(({ role, content }) => ({ role, content })),
     });
 
-    const summary = message.content[0].text;
-    return NextResponse.json({ summary });
+    const reply = response.content[0].text;
+    return NextResponse.json({ reply });
   } catch (error) {
-    console.error("Summarise API error:", error);
+    console.error("Chat API error:", error);
     return NextResponse.json(
-      { error: "Failed to summarise article" },
+      { error: "Failed to get a response" },
       { status: 500 }
     );
   }

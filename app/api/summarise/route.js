@@ -25,13 +25,13 @@ export async function POST(request) {
           - A one-sentence TL;DR
           - 3-5 key points
           - The main conclusion
-          - donot display in markdown format
+          - do not display in markdown format, convert md to human readable format and display that instead
 
           Article:
           ${articleText}`,
         },
       ],
-    });
+  });
 
     const summary = message.content[0].text;
     return NextResponse.json({ summary });

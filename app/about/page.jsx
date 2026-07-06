@@ -5,9 +5,9 @@ export default function About() {
       <main>
       <h1>Learn About Me</h1>
       <p>
-        I am Victoria, a Junior AI Technician at MCI Media Lab in Kampala, Uganda. 
-        I build AI-powered tools that help journalism educators detect disinformation 
-        and understand how artificial intelligence works in media.
+        I am Victoria, a Software Developer based in Kampala, Uganda, currently
+        working at MCI Media Lab. I build web, mobile, and backend applications,
+        and integrate AI capabilities where they add real value.
       </p>
 
       <div className="skills-">
@@ -17,6 +17,10 @@ export default function About() {
           <div className="skill">JavaScript</div>
           <div className="skill">React</div>
           <div className="skill">Next.js</div>
+          <div className="skill">React Native</div>
+          <div className="skill">Node.js & Express</div>
+          <div className="skill">Databases (MongoDB/SQL)</div>
+          <div className="skill">REST APIs</div>
           <div className="skill">Claude AI API</div>
           <div className="skill">Git & GitHub</div>
         </div>
