@@ -675,7 +675,7 @@ p {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background: transparent;
+  background: var(--bg);
 }
 
 .chat-bubble {
@@ -703,10 +703,10 @@ p {
 
 .chatbot-input-area {
   padding: 12px;
-  border-top: 1px solid var(--glass-border);
+  border-top: 1px solid var(--border);
   display: flex;
   gap: 8px;
-  background: transparent;
+  background: var(--surface);
 }
 
 .chatbot-input {
