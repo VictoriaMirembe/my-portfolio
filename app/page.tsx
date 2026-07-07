@@ -18,6 +18,9 @@ import {
 } from 'react-icons/si'
 import { Lock, Sparkles, MapPin, GraduationCap, Code2, Mail, Send } from 'lucide-react'
 import { FaLinkedin } from 'react-icons/fa'
+import { useTheme } from './context/ThemeContext'
+
+const HERO_IMAGE_LIGHT = 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1600&q=80'
 
 const SKILLS = [
   { label: 'HTML & CSS', href: 'https://developer.mozilla.org/en-US/docs/Web/HTML', Icon: SiHtml5, color: '#E34F26' },
@@ -35,6 +38,7 @@ const SKILLS = [
 ]
 
 export default function Home() {
+  const { isDark } = useTheme()
   const fullName = "Ssekajja Victoria Mirembe,"
   const [displayedName, setDisplayedName] = useState("")
   const [nameIndex, setNameIndex] = useState(0)
@@ -73,15 +77,17 @@ export default function Home() {
 
       <main id="home" className="page-section">
         <div className="hero-section">
-          <div className="hero-bg">
-            <Image
-              src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1600&q=80"
-              alt=""
-              fill
-              priority
-              style={{ objectFit: "cover" }}
-            />
-          </div>
+          {!isDark && (
+            <div className="hero-bg">
+              <Image
+                src={HERO_IMAGE_LIGHT}
+                alt=""
+                fill
+                priority
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+          )}
 
           <div className="hero-text">
             <p className="hero-greeting">Hello, I am</p>
@@ -136,8 +142,8 @@ export default function Home() {
         className="page-section about-section"
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 0.35, ease: 'easeOut' }}
       >
         <h1>Learn About Me</h1>
         <p className="about-hook">Turning ideas into reliable, shipped software.</p>
@@ -191,8 +197,8 @@ export default function Home() {
         className="page-section skills-section"
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 0.35, ease: 'easeOut' }}
       >
         <div className="skills">
           <h2>My Skills Set</h2>
@@ -259,8 +265,8 @@ export default function Home() {
         className="page-section featured-projects-section"
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 0.35, ease: 'easeOut' }}
       >
         <h2>Projects</h2>
         <p>A few things I have shipped</p>
@@ -368,8 +374,8 @@ export default function Home() {
         className="page-section contact-section"
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 0.35, ease: 'easeOut' }}
       >
         <h1>Contact Me</h1>
         <p>I am open to opportunities, collaborations and conversations. Feel free to reach out.</p>
