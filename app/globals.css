@@ -24,8 +24,8 @@
   --glass-border: rgba(15, 30, 70, 0.08);
   --glass-shadow: 0 8px 32px rgba(15, 23, 42, 0.08);
 
-  --blob-1: rgba(37, 99, 235, 0.22);
-  --blob-2: rgba(10, 17, 40, 0.16);
+  --blob-1: rgba(37, 99, 235, 0.28);
+  --blob-2: rgba(10, 17, 40, 0.2);
 }
 
 .dark-mode {
@@ -44,8 +44,8 @@
   --glass-border: rgba(148, 178, 235, 0.12);
   --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
 
-  --blob-1: rgba(59, 130, 246, 0.2);
-  --blob-2: rgba(37, 99, 235, 0.12);
+  --blob-1: rgba(59, 130, 246, 0.26);
+  --blob-2: rgba(37, 99, 235, 0.16);
 
   background-color: var(--bg);
   color: var(--text);
@@ -66,8 +66,8 @@ body::before {
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(600px circle at 15% 0%, var(--blob-1), transparent 60%),
-    radial-gradient(500px circle at 90% 15%, var(--blob-2), transparent 60%);
+    radial-gradient(750px circle at 15% 0%, var(--blob-1), transparent 65%),
+    radial-gradient(650px circle at 90% 20%, var(--blob-2), transparent 65%);
   pointer-events: none;
 }
 
@@ -606,6 +606,10 @@ p {
 }
 
 .stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background: var(--glass-bg);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -1222,6 +1226,10 @@ html {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .stat-card {
+    min-height: 120px;
+  }
+
   .services-grid {
     grid-template-columns: 1fr;
   }
@@ -1276,6 +1284,11 @@ html {
   .stats-section {
     grid-template-columns: 1fr 1fr;
     gap: 12px;
+  }
+
+  .stat-card {
+    min-height: 110px;
+    padding: 20px 12px;
   }
 
   .stat-card h3 {
