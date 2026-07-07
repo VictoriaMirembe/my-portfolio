@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Chatbot from "./components/Chatbot";
+import CustomCursor from "./components/CustomCursor";
+import Footer from "./components/Footer";
+import Nav from "./components/Nav";
+import SideNav from "./components/SideNav";
 import { ThemeProvider } from "./context/ThemeContext";
-import ThemeToggle from "./components/ThemeToggle";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,17 +36,11 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider>
-          <nav>
-            <span className="logo">Victoria</span>
-            <div className="nav-links">
-              <a href="/">Home</a>
-              <a href="/about">About</a>
-              <a href="/projects">Projects</a>
-              <a href="/contact">Contact</a>
-            </div>
-            <ThemeToggle />  {/* 👈 toggle button sits in the nav */}
-          </nav>
+          <CustomCursor />
+          <Nav />
           {children}
+          <SideNav />
+          <Footer />
           <Chatbot />
         </ThemeProvider>
       </body>

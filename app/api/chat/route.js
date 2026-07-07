@@ -36,11 +36,13 @@ export async function POST(request) {
     const response = await client.messages.create({
       model: "claude-sonnet-5",
       max_tokens: 500,
+      thinking: { type: "disabled" },
       system: SYSTEM_PROMPT,
       messages: messages.map(({ role, content }) => ({ role, content })),
     });
 
-    const reply = response.content[0].text;
+    const textBlock = response.content.find((block) => block.type === "text");
+    const reply = textBlock?.text ?? "Sorry, I couldn't come up with a response. Please try again.";
     return NextResponse.json({ reply });
   } catch (error) {
     console.error("Chat API error:", error);

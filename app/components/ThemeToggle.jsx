@@ -1,5 +1,6 @@
 'use client';
 
+import { Sun, Moon } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 export default function ThemeToggle() {
@@ -8,18 +9,11 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      style={{
-        background: 'transparent',
-        border: '2px solid white',
-        color: 'white',
-        borderRadius: '8px',
-        padding: '6px 14px',
-        cursor: 'pointer',
-        fontSize: '18px',
-      }}
+      className="theme-toggle"
       title="Toggle dark mode"
+      aria-label="Toggle dark mode"
     >
-      {isDark ? '☀️' : '🌙'}
+      {isDark ? <Sun size={18} /> : <Moon size={18} />}
     </button>
   );
 }
